@@ -6,6 +6,8 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 ## Data Collection Setup
 
+![Experimental Setup](experimental_setup.png)
+
 ### Hardware
 - **RFID Reader**: Impinj R420 with a 4-antenna array
 - **RFID Tags**: Impinj H47 passive tags
