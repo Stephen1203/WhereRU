@@ -1,10 +1,9 @@
+
 # RFID Indoor Localization Dataset
 
 ## Overview
 
 This dataset supports research on privacy-sensitive indoor localization using RFID technology, specifically for the "WhereRU" system. It contains RSSI (Received Signal Strength Indicator) values collected from a grid of passive RFID tags when a person stands at different locations with different orientations.
-
-
 
 ## Data Collection Setup
 
@@ -32,8 +31,19 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 ## Data Format
 
-The dataset is provided in NumPy format:
-- `.npy` files containing processed RSSI matrices
+### Raw Data Format
+The raw data is organized using the following naming convention:
+- `X.Y (Z).csv` where:
+  - `X` represents the position number (1-16)
+  - `Y` represents the orientation (1=front, 2=back, 3=left, 4=right)
+  - `Z` represents the collection round number
+
+For example:
+- `1.1 (2).csv` contains data from position 1, facing front (orientation 1), collection round 2
+- `2.3 (5).csv` contains data from position 2, facing left (orientation 3), collection round 5
+
+### Processed Data Format
+- **Processed NumPy files**: `.npy` files containing processed RSSI matrices
 - Each sample contains RSSI readings from all 4 antennas for the 8×8 grid of tags
 - The dataset leverages the human occlusion effect, where a person's presence alters RSSI values
 
@@ -51,11 +61,27 @@ The data processing pipeline includes:
 
 ```
 RFID_Dataset/
-├── processed_data/        # Processed .npy files
-├── merged_data/           # Merged datasets by position
+├── raw_data/              # Raw CSV files from RFID reader
+│   ├── 1.1 (1).csv        # Position 1, orientation front, round 1
+│   ├── 1.1 (2).csv        # Position 1, orientation front, round 2
+│   ├── ...
+│   ├── 16.4 (5).csv       # Position 16, orientation right, round 5
+├── processed_RFID_data        # Processed .npy files
+│   ├── 1.1.npy            # Processed data for position 1, orientation front
+│   ├── 1.2.npy            # Processed data for position 1, orientation back
+│   ├── ...
+│   ├── 16.4.npy           # Processed data for position 16, orientation right
+├── merged_RFID_data           # Merged datasets by position
+│   ├── 1_merged.npy       # Merged data for position 1 (all orientations)
+│   ├── 2_merged.npy       # Merged data for position 2 (all orientations)
+│   ├── ...
+│   ├── 16_merged.npy      # Merged data for position 16 (all orientations)
 ├── scripts/               # Processing scripts
 │   ├── process_raw.py     # Script for processing raw CSV data
 │   └── merge_data.py      # Script for merging processed files
+├── sample_data/           # Small sample datasets for quick testing
+│   ├── raw_sample.csv     # Sample of raw data
+│   └── processed_sample.npy # Sample of processed data
 └── README.md              # This documentation file
 ```
 
@@ -66,7 +92,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load a processed dataset file
-data = np.load('merged_data/1_merged.npy')
+data = np.load('merged_RFID_data/1_merged.npy')
 
 # Display information about the dataset
 print(f"Dataset shape: {data.shape}")
@@ -104,15 +130,7 @@ This script combines processed files from multiple collection sessions:
 
 This dataset is currently unpublished. If you use this dataset before publication, please contact the authors for appropriate citation information.
 
-```
-# After publication, please use the following citation format:
-@article{WhereRU2025,
-  title={WhereRU: Privacy-Sensitive Indoor Localization using RFID Technology},
-  author={[Authors]},
-  journal={[Journal/Conference]},
-  year={2025}
-}
-```
+
 
 ## License
 
