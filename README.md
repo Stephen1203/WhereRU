@@ -4,9 +4,13 @@
 
 This dataset supports research on privacy-sensitive indoor localization using RFID technology, specifically for the "WhereRU" system. It contains RSSI (Received Signal Strength Indicator) values collected from a grid of passive RFID tags when a person stands at different locations with different orientations.
 
+
+
 ## Data Collection Setup
 
-![Experimental Setup](experimental_setup.png)
+<p align="center">
+  <img src="experimental_setup.png" alt="Experimental Setup" width="600">
+</p>
 
 ### Hardware
 - **RFID Reader**: Impinj R420 with a 4-antenna array
