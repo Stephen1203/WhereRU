@@ -110,12 +110,12 @@ This dataset is currently unpublished. If you use this dataset before publicatio
 
 ## License
 
-This dataset is made available under the [Choose your license - e.g., CC BY-NC 4.0] license.
+This dataset and associated code are made available under the MIT License.
 
 ## Contact
 
 For questions about the dataset, please contact:
-[Your email/contact information]
+liuwenrui@iie.ac.cn
 
 ---
 
