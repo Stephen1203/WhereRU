@@ -16,42 +16,30 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 ### Experimental Setup
 
-Our experiment is designed to evaluate the accuracy of RFID-based indoor localization. The setup consists of a 2m × 2m grid area divided into 16 equal positions (50cm × 50cm each). Two RFID antenna arrays are placed at the bottom of the experimental area to capture signals.
+Our experiment is designed to evaluate the accuracy of RFID-based indoor localization. The setup consists of a 2m × 2m area divided into 16 equal positions (50cm × 50cm each). Two RFID antenna arrays are placed at the bottom of the experimental area to capture signals.
 
 The experimental setup shown above illustrates:
 
-- A 2m × 2m grid divided into 16 positions (50cm × 50cm each)
+- A 2m × 2m area divided into 16 positions
 - Positions numbered from 1 to 16, starting from the bottom-left (Position_1) to the top-right (Position_16)
 - Human subject positions with directional indicators (Front, Back, Left, Right)
 - Two RFID antenna arrays placed at the bottom for RF signal data collection
-
-### Position Mapping
-
-The positions are mapped as follows:
-
-| Row 4 (Top)    | Position_13 | Position_14 | Position_15 | Position_16 |
-|----------------|-------------|-------------|-------------|-------------|
-| **Row 3**      | Position_9  | Position_10 | Position_11 | Position_12 |
-| **Row 2**      | Position_5  | Position_6  | Position_7  | Position_8  |
-| **Row 1 (Bottom)** | Position_1  | Position_2  | Position_3  | Position_4  |
-
-Each position generates unique RF signal patterns that are used for training and testing our localization algorithms.
 
 ### Hardware
 - **RFID Reader**: Impinj R420 with a 4-antenna array
 - **RFID Tags**: Impinj H47 passive tags
 - **Tag Arrangement**: 8×8 grid (64 tags) with 20cm spacing between tags (approximating half-wavelength of UHF RFID signals at 915 MHz)
-- **Experimental Area**: 2m × 2m square divided into 16 equal grids (0.5m × 0.5m each)
+- **Experimental Area**: 2m × 2m square divided into 16 equal positions (0.5m × 0.5m each)
 
 ### Collection Methodology
-- Volunteers stood in the center of each grid cell facing four different orientations (front, back, left, right)
+- Volunteers stood in the center of each position facing four different orientations (front, back, left, right)
 - Background movement was introduced to create realistic interference
 - Ultrasonic sensors were installed during data collection to maintain environmental consistency
 - For each position-orientation combination, RSSI values were collected from all 64 tags via the 4-antenna array
 - Each sample consists of a 4-channel 8×8 matrix (4 antennas × 64 tags)
 
 ### Dataset Size
-- Approximately 1,600 samples per grid cell
+- Approximately 1,600 samples per position
 - **Total samples**: 25,600
 - **Features per sample**: 4×8×8 = 256 RSSI values
 
