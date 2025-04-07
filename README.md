@@ -1,4 +1,3 @@
-
 # RFID Indoor Localization Dataset
 
 ## Overview
@@ -7,9 +6,36 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 ## Data Collection Setup
 
-<p align="center">
-  <img src="experimental_setup.png" alt="Experimental Setup" width="600">
-</p>
+<div align="center">
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <img src="experimental_setup.png" alt="Experimental Setup" width="45%">
+    <img src="topview_diagram.png" alt="Experimental Setup Top View" width="45%">
+  </div>
+  <p><em>Left: Experimental setup photo. Right: Top-view diagram of the 2m × 2m experimental area.</em></p>
+</div>
+
+### Experimental Setup
+
+Our experiment is designed to evaluate the accuracy of RFID-based indoor localization. The setup consists of a 2m × 2m grid area divided into 16 equal positions (50cm × 50cm each). Two RFID antenna arrays are placed at the bottom of the experimental area to capture signals.
+
+The experimental setup shown above illustrates:
+
+- A 2m × 2m grid divided into 16 positions (50cm × 50cm each)
+- Positions numbered from 1 to 16, starting from the bottom-left (Position_1) to the top-right (Position_16)
+- Human subject positions with directional indicators (Front, Back, Left, Right)
+- Two RFID antenna arrays placed at the bottom for RF signal data collection
+
+### Position Mapping
+
+The positions are mapped as follows:
+
+| Row 4 (Top)    | Position_13 | Position_14 | Position_15 | Position_16 |
+|----------------|-------------|-------------|-------------|-------------|
+| **Row 3**      | Position_9  | Position_10 | Position_11 | Position_12 |
+| **Row 2**      | Position_5  | Position_6  | Position_7  | Position_8  |
+| **Row 1 (Bottom)** | Position_1  | Position_2  | Position_3  | Position_4  |
+
+Each position generates unique RF signal patterns that are used for training and testing our localization algorithms.
 
 ### Hardware
 - **RFID Reader**: Impinj R420 with a 4-antenna array
@@ -129,8 +155,6 @@ This script combines processed files from multiple collection sessions:
 ## Temporary Citation
 
 This dataset is currently unpublished. If you use this dataset before publication, please contact the authors for appropriate citation information.
-
-
 
 ## License
 
