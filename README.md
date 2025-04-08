@@ -75,28 +75,39 @@ The data processing pipeline includes:
 
 ```
 RFID_Dataset/
-├── raw_data/              # Raw CSV files from RFID reader
-│   ├── 1.1 (1).csv        # Position 1, orientation front, round 1
-│   ├── 1.1 (2).csv        # Position 1, orientation front, round 2
+├── raw_data/                  # Raw CSV files from RFID reader (organized by position)
+│   ├── 1.rar                  # Raw data for position 1
+│   │   ├── 1.1 (1).csv        # Position 1, orientation front, round 1
+│   │   ├── 1.1 (2).csv        # Position 1, orientation front, round 2
+│   │   ├── 1.1 (3).csv        # Position 1, orientation back, round 3
+│   │   └── ...
+│   ├── 2.rar                  # Raw data for position 2
+│   ├── 3.rar                  # Raw data for position 3
+│   ├── 4.rar                  # Raw data for position 4
 │   ├── ...
-│   ├── 16.4 (5).csv       # Position 16, orientation right, round 5
-├── processed_RFID_data        # Processed .npy files
-│   ├── 1.1.npy            # Processed data for position 1, orientation front
-│   ├── 1.2.npy            # Processed data for position 1, orientation back
+│   ├── 10.rar                 # Raw data for position 10
+│   ├── 11.rar                 # Raw data for position 11
 │   ├── ...
-│   ├── 16.4.npy           # Processed data for position 16, orientation right
-├── merged_RFID_data           # Merged datasets by position
-│   ├── 1_merged.npy       # Merged data for position 1 (all orientations)
-│   ├── 2_merged.npy       # Merged data for position 2 (all orientations)
+│   └── 16.rar                 # Raw data for position 16
+├── processed_RFID_data/       # Processed .npy files
+│   ├── 1.1.npy                # Processed data for position 1, orientation front
+│   ├── 1.2.npy                # Processed data for position 1, orientation back
 │   ├── ...
-│   ├── 16_merged.npy      # Merged data for position 16 (all orientations)
-├── scripts/               # Processing scripts
-│   ├── process_raw.py     # Script for processing raw CSV data
-│   └── merge_data.py      # Script for merging processed files
-├── sample_data/           # Small sample datasets for quick testing
-│   ├── raw_sample.csv     # Sample of raw data
-│   └── processed_sample.npy # Sample of processed data
-└── README.md              # This documentation file
+│   └── 16.4.npy               # Processed data for position 16, orientation right
+├── merged_RFID_data/          # Merged datasets by position
+│   ├── 1_merged.npy           # Merged data for position 1 (all orientations)
+│   ├── 2_merged.npy           # Merged data for position 2 (all orientations)
+│   ├── ...
+│   └── 16_merged.npy          # Merged data for position 16 (all orientations)
+├── scripts/                   # Processing scripts
+│   ├── process_raw.py         # Script for processing raw CSV data
+│   └── merge_data.py          # Script for merging processed files
+├── processed_RFID_data.rar    # Compressed archive containing all processed data
+├── merged_RFID_data.rar       # Compressed archive containing all merged data
+├── LICENSE                    # License file
+├── README.md                  # Project documentation
+├── experimental_setup.png     # Image showing the experimental setup
+└── topview_diagram.png        # Top view diagram of the experimental area
 ```
 
 ## Usage Examples
