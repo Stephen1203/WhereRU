@@ -1,8 +1,8 @@
-# RFID Indoor Localization Dataset
+# RFID Indoor Localization Dataset for WhereRU System
 
 ## Overview
 
-This dataset supports research on privacy-sensitive indoor localization using RFID technology, specifically for the "WhereRU" system. It contains RSSI (Received Signal Strength Indicator) values collected from a grid of passive RFID tags when a person stands at different locations with different orientations.
+This dataset supports research on privacy-sensitive indoor localization using RFID technology, specifically for the "WhereRU" system - a novel multimodal indoor localization system that integrates RFID with ultrasonic technologies through a hierarchical fusion framework. It contains RSSI (Received Signal Strength Indicator) values collected from a grid of passive RFID tags when a person stands at different locations with different orientations, enabling high-precision localization while preserving privacy.
 
 ## Data Collection Setup
 
@@ -16,30 +16,40 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 ### Experimental Setup
 
-Our experiment is designed to evaluate the accuracy of RFID-based indoor localization. The setup consists of a 2m × 2m area divided into 16 equal positions (50cm × 50cm each). Two RFID antenna arrays are placed at the bottom of the experimental area to capture signals.
+Our experiment is designed to evaluate privacy-preserving indoor localization capabilities. The setup consists of a 2m × 2m area divided into 16 equal positions (50cm × 50cm each). An RFID reader with a 4-antenna array captures signals from a carefully curated grid of passive tags, leveraging the human occlusion effect to achieve high-accuracy grid-level localization.
 
 The experimental setup shown above illustrates:
 
-- A 2m × 2m area divided into 16 positions
+- A 2m × 2m area divided into 16 equal grid cells (50cm × 50cm each)
 - Positions numbered from 1 to 16, starting from the bottom-left (Position_1) to the top-right (Position_16)
-- Human subject positions with directional indicators (Front, Back, Left, Right)
-- Two RFID antenna arrays placed at the bottom for RF signal data collection
+- Human subject positions with four orientation directions (Front, Back, Left, Right)
+- RFID antennas strategically positioned to maximize signal diversity
 
 ### Hardware
 - **RFID Reader**: Impinj R420 with a 4-antenna array
-- **RFID Tags**: Impinj H47 passive tags
-- **Tag Arrangement**: 8×8 grid (64 tags) with 20cm spacing between tags (approximating half-wavelength of UHF RFID signals at 915 MHz)
+- **RFID Tags**: Impinj H47 passive tags, quality-controlled through rigorous tag filtering
+- **Tag Arrangement**: 8×8 grid (64 tags) with 20cm spacing between tags (approximating half-wavelength of UHF RFID signals at 915 MHz to optimize spatial diversity while minimizing mutual coupling effects)
 - **Experimental Area**: 2m × 2m square divided into 16 equal positions (0.5m × 0.5m each)
+- **Ultrasonic Sensors**: Installed to maintain environmental consistency during data collection (measurements reserved for real-time localization experiments only)
+
+### Tag Quality Control
+
+<div align="center">
+  <img src="backscattered_power.png" alt="Backscattered Power Patterns" width="70%">
+  <p><em>Backscattered power patterns across different RFID tags. The polar plot shows signal strength (dBm) distribution across 360 degrees.</em></p>
+</div>
+
+We implemented a comprehensive quality control process during data preprocessing to ensure measurement reliability. Through analysis of backscattered power patterns across 360 degrees, we identified and eliminated tags with inconsistent or anomalous response characteristics (such as tag #14 shown in red in the figure above). This rigorous selection process established a uniform signal quality baseline across our experimental grid, minimizing hardware-induced variations and allowing our subsequent analysis to focus exclusively on position-dependent signal patterns.
 
 ### Collection Methodology
-- Volunteers stood in the center of each position facing four different orientations (front, back, left, right)
-- Background movement was introduced to create realistic interference
-- Ultrasonic sensors were installed during data collection to maintain environmental consistency
-- For each position-orientation combination, RSSI values were collected from all 64 tags via the 4-antenna array
+- Volunteers stood in the center of each grid cell facing four distinct orientations (front, back, left, right)
+- Additional individuals moved freely in the background to introduce realistic environmental interference
+- For each position-orientation combination, we recorded RSSI values from all 64 selected tags via the 4-antenna array
 - Each sample consists of a 4-channel 8×8 matrix (4 antennas × 64 tags)
+- Missing values from intermittent read failures were addressed through efficient neighbor-based interpolation
 
 ### Dataset Size
-- Approximately 1,600 samples per position
+- Approximately 1,600 samples per grid cell
 - **Total samples**: 25,600
 - **Features per sample**: 4×8×8 = 256 RSSI values
 
@@ -58,18 +68,20 @@ For example:
 
 ### Processed Data Format
 - **Processed NumPy files**: `.npy` files containing processed RSSI matrices
-- Each sample contains RSSI readings from all 4 antennas for the 8×8 grid of tags
-- The dataset leverages the human occlusion effect, where a person's presence alters RSSI values
+- Each sample provides a 4-channel 8×8 RSSI matrix representing readings from all antennas for the entire tag grid
+- The dataset leverages the human occlusion effect, where a person's presence systematically alters RSSI values
 
-## Preprocessing
+## Preprocessing Pipeline
 
 The data processing pipeline includes:
 1. Reading raw CSV files from the RFID reader
 2. Extracting tag_id, antenna_id, and RSSI values
 3. Organizing data into rounds of measurements
-4. Skipping the first two rounds to ensure stability
+4. Skipping initial rounds to ensure signal stability
 5. Creating 4×8×8 feature matrices (4 antennas, 8×8 tag grid)
-6. Handling missing values through interpolation based on neighboring tag readings
+6. Identifying and handling missing values through neighborhood-based interpolation
+7. Applying tag quality filtering based on backscattered power pattern analysis
+8. Normalizing RSSI values for consistent model training
 
 ## Directory Structure
 
@@ -89,6 +101,10 @@ RFID_Dataset/
 │   ├── 11.rar                 # Raw data for position 11
 │   ├── ...
 │   └── 16.rar                 # Raw data for position 16
+├── tag_analysis/              # Tag quality control data
+│   ├── backscattered_power.png # Visualization of tag response patterns
+│   ├── tag_quality_metrics.csv # Metrics used for tag selection
+│   └── filtered_tag_list.txt  # Final list of selected tags
 ├── processed_RFID_data/       # Processed .npy files
 │   ├── 1.1.npy                # Processed data for position 1, orientation front
 │   ├── 1.2.npy                # Processed data for position 1, orientation back
@@ -107,7 +123,8 @@ RFID_Dataset/
 ├── LICENSE                    # License file
 ├── README.md                  # Project documentation
 ├── experimental_setup.png     # Image showing the experimental setup
-└── topview_diagram.png        # Top view diagram of the experimental area
+├── topview_diagram.png        # Top view diagram of the experimental area
+└── backscattered_power.png    # Visualization of tag response pattern analysis
 ```
 
 ## Usage Examples
@@ -134,9 +151,7 @@ plt.ylabel('Tag Row')
 plt.show()
 ```
 
-## Data Processing Code
-
-The repository includes the following processing scripts:
+## Data Processing Scripts
 
 ### `process_raw.py` (Data Processing Script)
 This script transforms raw CSV data from the RFID reader into structured NumPy arrays:
@@ -151,9 +166,15 @@ This script combines processed files from multiple collection sessions:
 - Concatenates data from the same location
 - Creates consolidated datasets for each position
 
-## Temporary Citation
+## Citation
 
-This dataset is currently unpublished. If you use this dataset before publication, please contact the authors for appropriate citation information.
+If you use this dataset in your research, please cite our paper:
+
+```
+Liu, W., Wang, S., Zhang, J., Bai, G., Pan, B., Wang, S., & Li, J. (2025). 
+WhereRU: A Multimodal Indoor Localization System via Deep Learning-Based RFID and Ultrasonic Fusion. 
+[Under Review]
+```
 
 ## License
 
@@ -162,7 +183,8 @@ This dataset and associated code are made available under the MIT License.
 ## Contact
 
 For questions about the dataset, please contact:
-liuwenrui@iie.ac.cn
+- Wenrui Liu: liuwenrui@iie.ac.cn
+- Siye Wang (Corresponding author): wangsiye@iie.ac.cn
 
 ---
 
