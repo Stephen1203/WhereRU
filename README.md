@@ -80,8 +80,6 @@ The data processing pipeline includes:
 4. Skipping initial rounds to ensure signal stability
 5. Creating 4×8×8 feature matrices (4 antennas, 8×8 tag grid)
 6. Identifying and handling missing values through neighborhood-based interpolation
-7. Applying tag quality filtering based on backscattered power pattern analysis
-8. Normalizing RSSI values for consistent model training
 
 ## Directory Structure
 
@@ -89,7 +87,7 @@ The data processing pipeline includes:
 RFID_Dataset/
 ├── raw_data/                  # Raw CSV files from RFID reader (organized by position)
 │   ├── 1.rar                  # Raw data for position 1
-│   │   ├── 1.1 (1).csv        # Position 1, orientation front, round 1
+│   │   ├── 1.1.csv        # Position 1, orientation front, round 1
 │   │   ├── 1.1 (2).csv        # Position 1, orientation front, round 2
 │   │   ├── 1.1 (3).csv        # Position 1, orientation back, round 3
 │   │   └── ...
@@ -101,10 +99,6 @@ RFID_Dataset/
 │   ├── 11.rar                 # Raw data for position 11
 │   ├── ...
 │   └── 16.rar                 # Raw data for position 16
-├── tag_analysis/              # Tag quality control data
-│   ├── backscattered_power.png # Visualization of tag response patterns
-│   ├── tag_quality_metrics.csv # Metrics used for tag selection
-│   └── filtered_tag_list.txt  # Final list of selected tags
 ├── processed_RFID_data/       # Processed .npy files
 │   ├── 1.1.npy                # Processed data for position 1, orientation front
 │   ├── 1.2.npy                # Processed data for position 1, orientation back
