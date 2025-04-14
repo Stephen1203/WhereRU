@@ -9,7 +9,7 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 <div align="center">
   <div style="display: flex; justify-content: center; gap: 20px;">
     <img src="pictures/experimental_setup.png" alt="Experimental Setup" width="45%">
-    <img src="topview_diagram.png" alt="Experimental Setup Top View" width="45%">
+    <img src="pictures/topview_diagram.png" alt="Experimental Setup Top View" width="45%">
   </div>
   <p><em>Left: Experimental setup photo. Right: Top-view diagram of the 2m × 2m experimental area.</em></p>
 </div>
@@ -35,7 +35,7 @@ The experimental setup shown above illustrates:
 ### Tag Quality Control
 
 <div align="center">
-  <img src="backscattered_power.png" alt="Backscattered Power Patterns" width="70%">
+  <img src="pictures/backscattered_power.png" alt="Backscattered Power Patterns" width="70%">
   <p><em>Backscattered power patterns across different RFID tags. The polar plot shows signal strength (dBm) distribution across 360 degrees.</em></p>
 </div>
 
@@ -112,13 +112,12 @@ RFID_Dataset/
 ├── scripts/                   # Processing scripts
 │   ├── process_raw.py         # Script for processing raw CSV data
 │   └── merge_data.py          # Script for merging processed files
-├── processed_RFID_data.rar    # Compressed archive containing all processed data
-├── merged_RFID_data.rar       # Compressed archive containing all merged data
+├── pictures/                  # Directory containing all images
+│   ├── experimental_setup.png # Image showing the experimental setup
+│   ├── topview_diagram.png    # Top view diagram of the experimental area
+│   └── backscattered_power.png # Visualization of tag response pattern analysis
 ├── LICENSE                    # License file
 ├── README.md                  # Project documentation
-├── experimental_setup.png     # Image showing the experimental setup
-├── topview_diagram.png        # Top view diagram of the experimental area
-└── backscattered_power.png    # Visualization of tag response pattern analysis
 ```
 
 ## Usage Examples
