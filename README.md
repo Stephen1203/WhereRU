@@ -159,15 +159,6 @@ This script combines processed files from multiple collection sessions:
 - Concatenates data from the same location
 - Creates consolidated datasets for each position
 
-## Citation
-
-If you use this dataset in your research, please cite our paper:
-
-```
-Liu, W., Wang, S., Zhang, J., Bai, G., Pan, B., Wang, S., & Li, J. (2025). 
-WhereRU: A Multimodal Indoor Localization System via Deep Learning-Based RFID and Ultrasonic Fusion. 
-[Under Review]
-```
 
 ## License
 
