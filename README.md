@@ -8,7 +8,7 @@ This dataset supports research on privacy-sensitive indoor localization using RF
 
 <div align="center">
   <div style="display: flex; justify-content: center; gap: 20px;">
-    <img src="experimental_setup.png" alt="Experimental Setup" width="45%">
+    <img src="pictures/experimental_setup.png" alt="Experimental Setup" width="45%">
     <img src="topview_diagram.png" alt="Experimental Setup Top View" width="45%">
   </div>
   <p><em>Left: Experimental setup photo. Right: Top-view diagram of the 2m × 2m experimental area.</em></p>
