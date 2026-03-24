@@ -164,12 +164,6 @@ This script combines processed files from multiple collection sessions:
 
 This dataset and associated code are made available under the MIT License.
 
-## Contact
 
-For questions about the dataset, please contact:
-- Wenrui Liu: liuwenrui@iie.ac.cn
-- Siye Wang (Corresponding author): wangsiye@iie.ac.cn
-
----
 
 **Note**: This dataset accompanies a paper currently under review. The full citation information and additional documentation will be updated upon publication.
