@@ -166,4 +166,3 @@ This dataset and associated code are made available under the MIT License.
 
 
 
-**Note**: This dataset accompanies a paper currently under review. The full citation information and additional documentation will be updated upon publication.
